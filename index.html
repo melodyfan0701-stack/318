@@ -1,0 +1,686 @@
+<!doctype html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>30 秒之後</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<meta name="description" content="從 30 秒的審查到 24 天的占領：給 00 後與 10 後的太陽花學運懶人包。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Archivo:wdth,wght@62..125,500..900&family=Archivo+Black&display=swap">
+<style>
+/* Layout: 克萊茵藍為底的捲動敘事。整頁一張畫布，背景色隨段落平滑轉換（藍 → 深藍 → 太陽花黃 → 墨黑 → 藍）；
+   照片是貼在藍底上的撕邊剪報，文字以大字級、大留白推進故事 */
+:root{
+  --klein:#002FA7;
+  --klein-deep:#001B6E;
+  --klein-night:#00104A;
+  --sun:#FFC72C;
+  --paper:#F5F1E8;
+  --ink:#0B0B12;
+  --press-red:#E2483A;
+  --cjk:"Noto Sans TC","PingFang TC","Microsoft JhengHei",sans-serif;
+  --latin:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --num:"Archivo Black","Arial Black",sans-serif;
+  --gl:max(20px, env(safe-area-inset-left, 0px));
+  --gr:max(20px, env(safe-area-inset-right, 0px));
+  --space:clamp(140px, 22vh, 260px);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--klein);color:var(--paper);
+  font-family:var(--cjk);font-size:18px;line-height:1.85;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body.no-anim{transition:background-color 1s ease,color 1s ease}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:60;background:var(--top-band,var(--klein));transition:background-color 1s ease}
+/* 細緻顆粒，讓純色背景有印刷感 */
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.07;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>")}
+img{max-width:100%;display:block}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--sun);outline-offset:4px}
+h1,h2,h3,p{margin:0}
+h1,h2,h3{text-wrap:balance}
+.wrap{position:relative;z-index:2;max-width:1240px;margin:0 auto;padding-left:var(--gl);padding-right:var(--gr)}
+.muted{color:rgba(245,241,232,.78)}
+.impact .muted,.impact .src,.impact .stat p{color:rgba(11,11,18,.74)}
+
+/* ---------- 報頭 ---------- */
+.mast{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:50;pointer-events:none}
+.mast .wrap{display:flex;justify-content:space-between;align-items:center;padding-block:18px}
+.brand,.mast nav{pointer-events:auto}
+.brand{font-weight:900;font-size:17px;text-decoration:none;letter-spacing:.04em;background:var(--paper);color:var(--ink);padding:6px 14px;border-radius:99px}
+.mast nav{display:flex;gap:4px;background:color-mix(in srgb,var(--ink) 55%,transparent);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding:5px;border-radius:99px}
+.mast nav a{font-size:14px;font-weight:700;text-decoration:none;color:var(--paper);padding:5px 14px;border-radius:99px;white-space:nowrap}
+.mast nav a:hover,.mast nav a.on{background:var(--sun);color:var(--ink)}
+@media (max-width:760px){.mast nav{display:none}}
+
+/* ---------- 共用 ---------- */
+section{position:relative;scroll-margin-top:40px}
+.sec{padding-block:var(--space)}
+.pill{display:inline-flex;align-items:center;gap:10px;font-family:var(--latin);font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;
+  border:1.5px solid currentColor;border-radius:99px;padding:6px 16px;white-space:nowrap}
+.pill b{font-family:var(--num);font-weight:400;letter-spacing:.02em}
+.h2{font-weight:900;font-size:clamp(44px,7.6vw,112px);line-height:1.08;letter-spacing:-.025em;margin-top:28px}
+.h2 .acc{color:var(--acc)}
+.lede{font-size:clamp(19px,1.9vw,24px);line-height:1.75;max-width:30em;margin-top:30px;font-weight:500}
+.head{margin-bottom:clamp(64px,9vw,120px)}
+.src{font-size:13.5px;margin-top:56px;color:rgba(245,241,232,.7)}
+.src a{text-underline-offset:3px}
+
+/* 剪報 */
+.cut{margin:0;position:relative;filter:drop-shadow(0 18px 30px rgba(0,8,40,.35))}
+.cut img{width:100%;height:auto}
+.cut.tape::before{content:"";position:absolute;top:-13px;left:50%;width:96px;height:26px;transform:translateX(-50%) rotate(-3deg);
+  background:color-mix(in srgb,var(--sun) 80%,transparent);z-index:2}
+.cut figcaption{font-size:13px;margin-top:10px;color:color-mix(in srgb,currentColor 70%,transparent)}
+
+/* ---------- 01 HERO ---------- */
+.hero{--acc:var(--sun);min-height:100vh;display:flex;align-items:center;padding-block:120px 100px;overflow:hidden}
+.hero-bg{position:absolute;inset:0;background:url("img/hero-chamber.webp") center/cover;opacity:.32;mix-blend-mode:luminosity;
+  -webkit-mask-image:linear-gradient(180deg,#000 30%,transparent 100%);mask-image:linear-gradient(180deg,#000 30%,transparent 100%)}
+.hero .wrap{width:100%;display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,.7fr);gap:40px;align-items:center}
+.kicker{font-family:var(--latin);font-weight:700;font-size:14px;letter-spacing:.14em;color:var(--sun);display:block}
+.title{display:flex;align-items:flex-end;gap:.04em;margin-top:18px;line-height:.82}
+.num{font-family:var(--num);font-size:clamp(170px,30vw,400px);letter-spacing:-.05em;color:var(--sun);font-variant-numeric:tabular-nums;display:inline-block;transform-origin:left bottom}
+.unit{font-weight:900;font-size:clamp(80px,13vw,180px);letter-spacing:-.04em}
+.hero .lede{margin-top:40px}
+.q{font-weight:900;font-size:clamp(26px,3.2vw,40px);margin-top:26px;color:var(--sun);display:inline-block}
+.cue{display:inline-flex;align-items:center;gap:12px;margin-top:48px;font-weight:700;text-decoration:none;background:var(--paper);color:var(--ink);padding:12px 22px;border-radius:99px}
+.cue .arrow{display:inline-block}
+.hero-cuts{display:grid;gap:26px;justify-items:end}
+.hero-cuts .cut{width:min(100%,380px)}
+.hero-cuts .cut:nth-child(2){width:min(78%,290px);margin-right:36px}
+@media (max-width:900px){
+  .hero{min-height:auto;padding-block:130px 80px}
+  .hero .wrap{grid-template-columns:1fr}
+  .hero-cuts{grid-template-columns:1fr 1fr;justify-items:stretch;align-items:start}
+  .hero-cuts .cut,.hero-cuts .cut:nth-child(2){width:100%;margin:0}
+}
+
+/* ---------- 02 起因 ---------- */
+.cause{--acc:var(--sun)}
+.cause-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,96px);align-items:start}
+.qa{display:grid;gap:clamp(48px,6vw,80px)}
+.qa article{max-width:32em}
+.qa .qn{font-family:var(--num);font-size:15px;color:var(--ink);background:var(--sun);border-radius:99px;padding:3px 12px;display:inline-block}
+.qa h3{font-weight:900;font-size:clamp(30px,3.4vw,44px);line-height:1.25;margin:16px 0 14px;letter-spacing:-.01em}
+.circled{position:relative;display:inline-block;font-weight:900;color:var(--sun);white-space:nowrap;padding:0 4px}
+.circled svg{position:absolute;left:-16px;top:-12px;width:calc(100% + 32px);height:calc(100% + 24px);overflow:visible;pointer-events:none}
+.circled path{fill:none;stroke:var(--sun);stroke-width:2.6;stroke-linecap:round}
+.board{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:16px;position:sticky;top:110px}
+.board .cut:nth-child(1){grid-column:1/5}
+.board .cut:nth-child(2){grid-column:4/7;margin-top:-34px;z-index:2}
+.board .cut:nth-child(3){grid-column:1/4;margin-top:-12px}
+.board .cut:nth-child(4){grid-column:3/7;margin-top:-44px;z-index:3}
+.board .cut:nth-child(5){grid-column:1/5;margin-top:-18px}
+@media (max-width:900px){.cause-grid{grid-template-columns:1fr}.board{position:relative;top:0}}
+
+/* ---------- 03 時間軸 ---------- */
+.tl{--acc:var(--sun);overflow:hidden}
+.giant{position:absolute;left:0;right:0;top:clamp(80px,12vh,160px);text-align:center;font-family:var(--num);font-size:clamp(150px,28vw,440px);line-height:.85;
+  color:color-mix(in srgb,currentColor 9%,transparent);pointer-events:none;white-space:nowrap;z-index:0}
+.chips-wrap{overflow-x:auto;padding:6px 2px 14px;margin:0 -2px;scrollbar-width:none}
+.chips{display:flex;gap:10px;min-width:max-content}
+.chip{font:inherit;cursor:pointer;border:1.5px solid color-mix(in srgb,currentColor 45%,transparent);background:transparent;color:inherit;border-radius:99px;
+  padding:10px 20px;display:grid;justify-items:start;line-height:1.3;text-align:left;transition:background .25s,color .25s,border-color .25s}
+.chip .d{font-family:var(--num);font-size:20px}
+.chip .n{font-size:13px;font-weight:700;opacity:.8}
+.chip:hover{border-color:var(--sun)}
+.chip[aria-selected="true"]{background:var(--sun);color:var(--ink);border-color:var(--sun)}
+.track{height:3px;background:color-mix(in srgb,currentColor 18%,transparent);border-radius:3px;margin-top:22px;overflow:hidden}
+.track i{display:block;height:100%;background:var(--sun);transform-origin:left;transform:scaleX(0)}
+.panel{margin-top:44px;background:var(--paper);color:var(--ink);border-radius:28px;display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);min-height:420px;overflow:hidden}
+.p-text{padding:clamp(28px,4.4vw,60px);display:grid;align-content:start;gap:18px;min-width:0}
+.stamp{justify-self:start;font-family:var(--num);color:var(--klein);font-size:16px;letter-spacing:.06em;border:2px solid var(--klein);border-radius:99px;padding:4px 14px}
+.p-text h3{font-weight:900;font-size:clamp(30px,3.6vw,48px);line-height:1.2;letter-spacing:-.015em}
+.p-text p{font-size:18px}
+.p-media{padding:clamp(24px,3vw,40px);display:grid;place-items:center;background:color-mix(in srgb,var(--klein) 8%,var(--paper));min-width:0}
+.p-media .cut{width:100%;max-width:420px;filter:drop-shadow(0 12px 22px rgba(0,8,40,.25))}
+.figs{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:18px;width:100%}
+.fig b{display:block;font-family:var(--num);font-weight:400;font-size:clamp(44px,5vw,64px);line-height:1;color:var(--klein);font-variant-numeric:tabular-nums}
+.fig span{font-size:14.5px;line-height:1.5;display:block;margin-top:8px;color:#4b4a55}
+.fig.red b{color:var(--press-red)}
+.bignum{font-family:var(--num);font-size:clamp(110px,15vw,190px);color:var(--klein);line-height:.9;text-align:center}
+.bignum small{font-family:var(--cjk);font-weight:900;font-size:.3em;color:var(--ink)}
+.callout{grid-column:1/-1;background:var(--klein);color:var(--paper);border-radius:16px;padding:14px 18px;font-weight:700;font-size:16px}
+@media (max-width:780px){.panel{grid-template-columns:1fr}}
+
+/* ---------- 04 影響（黃） ---------- */
+.impact{--acc:var(--klein)}
+.impact .pill{color:var(--klein)}
+.impact-photo{position:relative;margin-bottom:clamp(80px,10vw,140px)}
+.impact-photo .over{position:absolute;right:-2%;bottom:-16%;width:min(38%,400px)}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(40px,5vw,72px) clamp(28px,4vw,56px)}
+.stat{display:grid;align-content:start;gap:10px;min-width:0}
+.stat .k{font-family:var(--latin);font-size:13px;font-weight:700;letter-spacing:.14em;color:var(--klein)}
+.stat .v{font-family:var(--num);font-size:clamp(56px,7vw,96px);line-height:.95;letter-spacing:-.02em;font-variant-numeric:tabular-nums;display:inline-block;transform-origin:left bottom}
+.stat .v.word{font-family:var(--cjk);font-weight:900;font-size:clamp(38px,4.2vw,56px);letter-spacing:-.02em}
+.stat p{font-size:16.5px;line-height:1.7}
+@media (max-width:900px){.stats{grid-template-columns:1fr 1fr}}
+@media (max-width:560px){.stats{grid-template-columns:1fr}.impact-photo .over{position:relative;right:auto;bottom:auto;width:72%;margin:-36px 0 0 auto}}
+
+/* ---------- 05 另一種聲音（黑） ---------- */
+.other{--acc:var(--sun)}
+.flips{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}
+.flip{perspective:1400px;background:none;border:0;padding:0;font:inherit;color:inherit;text-align:left;cursor:pointer;display:grid}
+.flip-inner{position:relative;display:grid;transform-style:preserve-3d;min-height:300px}
+.face{grid-area:1/1;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:28px;padding:36px;display:grid;align-content:space-between;gap:20px}
+.face.front{background:var(--klein);color:var(--paper)}
+.face.front .fq{font-weight:900;font-size:clamp(28px,3vw,38px);line-height:1.3;letter-spacing:-.01em}
+.face.front .hint{font-weight:700;font-size:14px;color:var(--sun)}
+.face.back{background:var(--paper);color:var(--ink);transform:rotateY(180deg)}
+.face.back .txt{font-size:18px;line-height:1.8}
+.face.back .who{font-size:13px;color:#5a5966}
+@media (max-width:780px){.flips{grid-template-columns:1fr}}
+
+/* ---------- 06 跟你有關 ---------- */
+.relate{--acc:var(--sun)}
+.relate-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:clamp(40px,6vw,96px);align-items:start}
+.relate-text{display:grid;gap:36px;max-width:34em}
+.bird{background:var(--paper);color:var(--ink);border-radius:28px;padding:32px}
+.bird .lbl{font-weight:700;font-size:14px;color:var(--klein)}
+.road{font-weight:900;font-size:clamp(42px,5vw,64px);letter-spacing:.04em;line-height:1.2;margin:6px 0 12px}
+.road .swap{color:var(--klein);display:inline-block}
+.road s{color:var(--press-red);text-decoration-thickness:4px}
+.relate-text h3{font-weight:900;font-size:clamp(28px,3vw,36px);color:var(--sun)}
+.life{list-style:none;padding:0;margin:0;display:grid}
+.life li{display:grid;grid-template-columns:64px 1fr;gap:12px;align-items:baseline;border-top:1px solid color-mix(in srgb,currentColor 25%,transparent);padding:14px 0}
+.life li b{color:var(--sun)}
+.relate-cuts{display:grid;gap:20px;position:sticky;top:110px}
+.relate-cuts .cut:nth-child(2){width:66%;justify-self:end;margin-top:-60px}
+@media (max-width:900px){.relate-grid{grid-template-columns:1fr}.relate-cuts{position:relative;top:0}}
+
+/* ---------- 07 結語 ---------- */
+.closing{--acc:var(--sun);min-height:100vh;display:flex;align-items:center}
+.closing .wrap{width:100%;display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,.55fr);gap:clamp(40px,6vw,96px);align-items:center}
+.slogan{font-weight:900;font-size:clamp(36px,5.2vw,76px);line-height:1.22;letter-spacing:-.02em}
+.slogan .line{display:block}
+.slogan .acc{color:var(--sun)}
+.acts{list-style:none;padding:0;margin:56px 0 0;display:grid;gap:18px;counter-reset:a}
+.acts li{counter-increment:a;display:grid;grid-template-columns:auto 1fr;gap:16px;align-items:baseline;font-size:18px}
+.acts li::before{content:counter(a);font-family:var(--num);background:var(--sun);color:var(--ink);width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-size:14px}
+.sun-wrap{position:relative;display:grid;place-items:center}
+.glow{position:absolute;inset:-12%;border-radius:50%;background:radial-gradient(circle,color-mix(in srgb,var(--sun) 50%,transparent) 0%,transparent 66%)}
+.sun-wrap img{position:relative;width:100%;height:auto;max-width:440px;aspect-ratio:1;object-fit:cover;border-radius:50%}
+@media (max-width:900px){.closing{min-height:auto}.closing .wrap{grid-template-columns:1fr}.sun-wrap{max-width:320px;margin:0 auto}}
+
+/* ---------- 來源 ---------- */
+.sources h2{font-weight:900;font-size:clamp(32px,4vw,52px);letter-spacing:-.015em;margin-bottom:40px}
+.src-grid{display:grid;grid-template-columns:minmax(0,1.4fr) minmax(0,.6fr);gap:56px}
+.src-list{margin:0;padding-left:1.4em;display:grid;gap:10px;font-size:16px}
+.src-list a{text-underline-offset:3px;word-break:break-word}
+.src-list small{color:color-mix(in srgb,currentColor 62%,transparent);font-size:13px}
+.credit{background:var(--paper);color:var(--ink);border-radius:24px;padding:26px;align-self:start;font-size:15.5px}
+.credit h3{font-size:18px;margin-bottom:8px}
+.credit-list{margin:8px 0 0;padding-left:1.2em;display:grid;gap:4px;font-size:14.5px}
+.credit-list a{text-underline-offset:3px;word-break:break-word}
+footer{position:relative;z-index:2;font-size:14px;color:color-mix(in srgb,currentColor 70%,transparent)}
+footer .wrap{padding-block:40px calc(40px + env(safe-area-inset-bottom,0px));display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;border-top:1px solid color-mix(in srgb,currentColor 20%,transparent)}
+@media (max-width:780px){.src-grid{grid-template-columns:1fr}}
+
+/* ---------- 閱讀進度 ---------- */
+.progress{position:fixed;z-index:70;right:calc(20px + env(safe-area-inset-right,0px));bottom:calc(20px + env(safe-area-inset-bottom,0px));width:66px;height:66px;border-radius:50%;
+  background:var(--ink);display:grid;place-items:center;text-decoration:none;box-shadow:0 10px 26px rgba(0,0,0,.3)}
+.progress svg{position:absolute;inset:5px;width:56px;height:56px;transform:rotate(-90deg)}
+.progress circle{fill:none;stroke-width:4.5}
+.progress .t{stroke:rgba(245,241,232,.18)}
+.progress .b{stroke:var(--sun);stroke-linecap:round}
+.progress span{position:relative;font-family:var(--num);font-size:13px;color:var(--paper);font-variant-numeric:tabular-nums}
+
+
+/* 開場前隱藏首頁文字，避免先閃一下再消失 */
+.pre .hero .kicker,.pre .hero .num,.pre .hero .unit,.pre .hero .lede,.pre .hero .q,.pre .hero .cue,.pre .hero-cuts .cut{opacity:0}
+.hero .wrap{will-change:transform}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+<script>
+if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+  document.documentElement.classList.add('pre');
+  setTimeout(function(){ document.documentElement.classList.remove('pre'); }, 2500);
+}
+</script>
+
+
+</head>
+<body>
+<header class="mast">
+  <div class="wrap">
+    <a class="brand" href="#top">30 秒之後</a>
+    <nav aria-label="區塊導覽">
+      <a href="#cause">起因</a><a href="#timeline">懶人包</a><a href="#impact">影響</a><a href="#relate">跟你有關</a><a href="#sources">來源</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero" data-bg="#002FA7" data-fg="#F5F1E8" aria-labelledby="hero-title">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="wrap">
+    <div>
+      <span class="kicker" id="kicker">2014.03.17 ・ 立法院內政委員會</span>
+      <h1 class="title" id="hero-title" aria-label="30 秒。"><span class="num" aria-hidden="true">30</span><span class="unit" aria-hidden="true">秒。</span></h1>
+      <p class="lede">一份開放金融、運輸、通訊等服務業的兩岸協議，在委員會只花了大約 30 秒，就被宣布「審查完畢」。</p>
+      <p class="q">如果這件事跟你有關，你會怎麼做？</p>
+      <div><a class="cue" href="#cause">看 2014 年的大學生做了什麼 <span class="arrow" aria-hidden="true">↓</span></a></div>
+    </div>
+    <div class="hero-cuts" aria-hidden="true">
+      <figure class="cut tape" data-r="-4"><img src="img/color-stage.webp" alt="" width="1100" height="616"></figure>
+      <figure class="cut tape" data-r="3"><img src="img/collage-sticker.webp" alt="" width="900" height="668"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- CAUSE -->
+<section class="sec cause" id="cause" data-bg="#001B6E" data-fg="#F5F1E8" aria-labelledby="cause-title">
+  <div class="wrap">
+    <div class="head">
+      <span class="pill" data-track><b>01</b> 事件起因</span>
+      <h2 class="h2" id="cause-title" data-split="enter">一份協議，<span class="acc">三十秒</span></h2>
+      <p class="lede muted" data-reveal>太陽花學運的起點，不是一場遊行，而是一次只花了 30 秒的審查。先搞懂三件事。</p>
+    </div>
+    <div class="cause-grid">
+      <div class="qa">
+        <article>
+          <span class="qn">Q1</span>
+          <h3 data-split="pop">服貿是什麼？</h3>
+          <p class="muted">2013 年 6 月，兩岸簽下《海峽兩岸服務貿易協議》，簡稱服貿。它是 ECFA 的一部分，讓雙方在金融、運輸、通訊等服務業互相開放投資。</p>
+        </article>
+        <article>
+          <span class="qn">Q2</span>
+          <h3 data-split="pop">為什麼吵起來？</h3>
+          <p class="muted">很多人在意的不只是內容，更是過程。協議怎麼談、怎麼審，外界都看不清楚，因此被批評是「黑箱」。</p>
+        </article>
+        <article>
+          <span class="qn">Q3</span>
+          <h3 data-split="pop">那 30 秒發生了什麼？</h3>
+          <p class="muted">2014 年 3 月 17 日，內政委員會召委張慶忠在一片混亂中宣布，服貿「視為已審查」，直接送到院會存查。整個過程大約
+            <span class="circled">30 秒<svg viewBox="0 0 120 60" preserveAspectRatio="none" aria-hidden="true"><path d="M8 34 C 6 12, 60 4, 104 14 C 124 20, 118 50, 70 55 C 28 59, 4 48, 14 26"/></svg></span>。</p>
+        </article>
+      </div>
+      <div class="board" aria-label="現場照片剪貼">
+        <figure class="cut tape" data-r="-3"><img src="img/color-banner.webp" alt="夜間抗議現場，白布條上以毛筆寫著「賤民解放區」" width="1100" height="653" loading="lazy"></figure>
+        <figure class="cut" data-r="4"><img src="img/collage-stage.webp" alt="現場大螢幕寫著「今天過服貿，明天拆政府」" width="900" height="463" loading="lazy"></figure>
+        <figure class="cut" data-r="-4"><img src="img/color-sunflowers.webp" alt="民眾手持太陽花與黃絲帶" width="1100" height="736" loading="lazy"></figure>
+        <figure class="cut tape" data-r="2"><img src="img/collage-banner.webp" alt="「賤民解放區」布條的黑白網點版本" width="1000" height="547" loading="lazy"></figure>
+        <figure class="cut" data-r="-2"><img src="img/color-crowd.webp" alt="立法院外街道上的大批群眾" width="1100" height="596" loading="lazy"></figure>
+      </div>
+    </div>
+    <p class="src">資料來源：<a href="https://www.twreporter.org/a/318-movement-10th-anniversary-10-keywords" target="_blank" rel="noopener">報導者</a>、<a href="https://www.cna.com.tw/news/aipl/202403165004.aspx" target="_blank" rel="noopener">中央社</a>、<a href="https://www.thenewslens.com/feature/318-movement-10yrs/200024" target="_blank" rel="noopener">關鍵評論網</a></p>
+  </div>
+</section>
+
+<!-- TIMELINE -->
+<section class="sec tl" id="timeline" data-bg="#002FA7" data-fg="#F5F1E8" aria-labelledby="tl-title">
+  <div class="giant" aria-hidden="true">24 DAYS</div>
+  <div class="wrap">
+    <div class="head">
+      <span class="pill" data-track><b>02</b> 懶人包</span>
+      <h2 class="h2" id="tl-title" data-split="enter"><span class="acc">24 天</span>，一條線看完</h2>
+      <p class="lede muted" data-reveal>點日期，看那天發生了什麼。</p>
+    </div>
+    <div class="chips-wrap"><div class="chips" role="tablist" aria-label="太陽花學運時間軸"></div></div>
+    <div class="track" aria-hidden="true"><i></i></div>
+    <div class="panel" id="panel" role="tabpanel" aria-live="polite">
+      <div class="p-text"></div>
+      <div class="p-media"></div>
+    </div>
+    <p class="src">資料來源：<a href="https://www.cna.com.tw/news/aipl/202403165004.aspx" target="_blank" rel="noopener">中央社</a>、<a href="https://www.twreporter.org/a/318-movement-10th-anniversary-10-keywords" target="_blank" rel="noopener">報導者</a>、<a href="https://www.thenewslens.com/feature/318-movement-10yrs/200024" target="_blank" rel="noopener">關鍵評論網</a></p>
+  </div>
+</section>
+
+<!-- IMPACT -->
+<section class="sec impact" id="impact" data-bg="#FFC72C" data-fg="#0B0B12" aria-labelledby="impact-title">
+  <div class="wrap">
+    <div class="head">
+      <span class="pill" data-track><b>03</b> 後續影響</span>
+      <h2 class="h2" id="impact-title" data-split="enter">十年後，<span class="acc">留下了什麼？</span></h2>
+      <p class="lede muted" data-reveal>占領結束了，但有些事從此不一樣。</p>
+    </div>
+    <div class="impact-photo">
+      <figure class="cut"><img src="img/impact-crowd.webp" alt="人群中有人高舉一朵太陽花" width="1400" height="788" loading="lazy"></figure>
+      <figure class="cut tape over" data-r="4"><img src="img/color-chamber.webp" alt="占領期間的立法院議場，民眾坐滿議場，掛著黃色布條" width="1100" height="828" loading="lazy"></figure>
+    </div>
+    <div class="stats">
+      <div class="stat"><span class="k">服貿協議</span><span class="v word" data-split="pop">擱置至今</span><p>之後沒有再推動。</p></div>
+      <div class="stat"><span class="k">監督條例</span><span class="v word" data-split="pop">沒有專法</span><p>2019 年改用修正《兩岸人民關係條例》的方式，加入審查規定。</p></div>
+      <div class="stat"><span class="k">參與者</span><span class="v" data-count="56" data-suffix="%">56%</span><p>受訪參與者中是學生的比例（抽樣調查），橫跨 96 所大專院校。</p></div>
+      <div class="stat"><span class="k">年齡</span><span class="v" data-count="66.8" data-suffix="%" data-dec="1">66.8%</span><p>受訪參與者落在 20–29 歲。主角，就是年輕人。</p></div>
+      <div class="stat"><span class="k">政治版圖</span><span class="v word" data-split="pop">新政黨崛起</span><p>時代力量一度成為第三大黨；柯文哲 2014 年當選台北市長，2019 年成立民眾黨。</p></div>
+      <div class="stat"><span class="k">司法結果</span><span class="v" data-count="22" data-suffix=" 人">22 人</span><p>占領立法院案，林飛帆等 22 人無罪定讞。</p></div>
+    </div>
+    <p class="src">資料來源：<a href="https://www.twreporter.org/a/318-movement-10th-anniversary-10-keywords" target="_blank" rel="noopener">報導者</a>、<a href="https://www.cna.com.tw/news/aipl/202403165004.aspx" target="_blank" rel="noopener">中央社</a>、<a href="https://www.thenewslens.com/feature/318-movement-10yrs/200024" target="_blank" rel="noopener">關鍵評論網</a></p>
+  </div>
+</section>
+
+<!-- OTHER VOICES -->
+<section class="sec other" id="other" data-bg="#0B0B12" data-fg="#F5F1E8" aria-labelledby="other-title">
+  <div class="wrap">
+    <div class="head">
+      <span class="pill" data-track>另一種聲音</span>
+      <h2 class="h2" id="other-title" data-split="enter">不是每個人<span class="acc">都反對</span></h2>
+      <p class="lede muted" data-reveal>點卡片翻面，看看當時支持方和質疑者怎麼說。</p>
+    </div>
+    <div class="flips">
+      <button class="flip" type="button" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="fq">當時，支持服貿的人怎麼想？</span><span class="hint">點我翻面 →</span></span>
+          <span class="face back"><span class="txt">時任總統馬英九在 2014 年 1 月表示：服貿不通過，傷害的是台灣，也會不利台灣加入 TPP、RCEP 等區域經濟整合。</span><span class="who">來源：風傳媒，2014/01/22</span></span>
+        </span>
+      </button>
+      <button class="flip" type="button" aria-pressed="false">
+        <span class="flip-inner">
+          <span class="face front"><span class="fq">有人覺得學運擋錯了？</span><span class="hint">點我翻面 →</span></span>
+          <span class="face back"><span class="txt">有人認為，學運擋下服貿，等於擋住台灣經濟的一條出路。也有人提醒，中國是很大的經濟體，台灣得想清楚怎麼跟它往來。</span><span class="who">來源：公視新聞 2018/03/17、關鍵評論網轉載德國之聲 2024/03/19</span></span>
+        </span>
+      </button>
+    </div>
+    <p class="src">資料來源：<a href="https://www.storm.mg/article/26651" target="_blank" rel="noopener">風傳媒</a>、<a href="https://news.pts.org.tw/article/388583" target="_blank" rel="noopener">公視新聞</a>、<a href="https://www.thenewslens.com/article/200342" target="_blank" rel="noopener">關鍵評論網</a></p>
+  </div>
+</section>
+
+<!-- RELATE -->
+<section class="sec relate" id="relate" data-bg="#002FA7" data-fg="#F5F1E8" aria-labelledby="relate-title">
+  <div class="wrap">
+    <div class="head">
+      <span class="pill" data-track><b>04</b> 這跟你有關</span>
+      <h2 class="h2" id="relate-title" data-split="enter">政治，其實<span class="acc">離你很近</span></h2>
+      <p class="lede muted" data-reveal>做這個網站，是因為我發現身邊很多人不想談政治。關心的人，有時還會被叫成「青鳥」來嘲諷。可是，政治一直都在你身邊。</p>
+    </div>
+    <div class="relate-grid">
+      <div class="relate-text">
+        <div class="bird">
+          <p class="lbl">「青鳥」是怎麼來的？</p>
+          <p class="road">青<span class="swap" id="swap"><s>島</s>鳥</span>東路</p>
+          <p>2024 年 5 月，立法院表決職權相關修法，場外民眾多次集結抗議，稱為「青鳥行動」。名字取自立法院旁的「青島東路」，把「島」改成長得很像的「鳥」。</p>
+        </div>
+        <h3 data-split="pop">這些事，都有人在決定</h3>
+        <ul class="life">
+          <li><b>打工</b><span>你的時薪最低可以是多少</span></li>
+          <li><b>租屋</b><span>房東可以怎麼漲租、押金怎麼算</span></li>
+          <li><b>手機</b><span>你每天用的 App 能蒐集你哪些資料</span></li>
+        </ul>
+        <p class="muted">這些規則不是自然出現的，都是有人在立法院和政府裡決定的。2014 年那群大學生在意的，就是「決定的過程」能不能被看見。</p>
+      </div>
+      <div class="relate-cuts" aria-hidden="true">
+        <figure class="cut tape" data-r="-3"><img src="img/color-fists.webp" alt="" width="1100" height="787" loading="lazy"></figure>
+        <figure class="cut tape" data-r="4"><img src="img/timeline-0410.webp" alt="" width="800" height="800" loading="lazy"></figure>
+      </div>
+    </div>
+    <p class="src">資料來源：<a href="https://www.cna.com.tw/news/aipl/202405280432.aspx" target="_blank" rel="noopener">中央社</a>、<a href="https://www.mirrormedia.mg/story/20240527inv014" target="_blank" rel="noopener">鏡週刊</a></p>
+  </div>
+</section>
+
+<!-- CLOSING -->
+<section class="sec closing" id="closing" data-bg="#00104A" data-fg="#F5F1E8" aria-label="結語">
+  <div class="wrap">
+    <div>
+      <p class="slogan" aria-label="關心政治不是選邊站，是知道誰在決定你的生活。">
+        <span class="line" data-split="move" aria-hidden="true">關心政治不是選邊站，</span>
+        <span class="line acc" data-split="move" aria-hidden="true">是知道誰在決定你的生活。</span>
+      </p>
+      <ol class="acts">
+        <li>看懂一則新聞。遇到數字時，先問一句「這是誰算的？」</li>
+        <li>查一次你選區的立委是誰，看看他最近投了什麼票。</li>
+        <li>跟朋友聊一次。不用吵架，聊聊你們怎麼想就好。</li>
+      </ol>
+    </div>
+    <div class="sun-wrap">
+      <div class="glow" aria-hidden="true"></div>
+      <img src="img/closing-sunflower.webp" alt="人群中被高舉的太陽花" width="900" height="900" loading="lazy">
+    </div>
+  </div>
+</section>
+
+<!-- SOURCES -->
+<section class="sec sources" id="sources" data-bg="#002FA7" data-fg="#F5F1E8" aria-labelledby="src-title">
+  <div class="wrap">
+    <h2 id="src-title" data-split="enter">資料來源與延伸閱讀</h2>
+    <div class="src-grid">
+      <ol class="src-list">
+        <li><a href="https://www.twreporter.org/a/318-movement-10th-anniversary-10-keywords" target="_blank" rel="noopener">318 運動十週年：10 個關鍵字</a> <small>報導者</small></li>
+        <li><a href="https://www.cna.com.tw/news/aipl/202403165004.aspx" target="_blank" rel="noopener">太陽花學運十週年</a> <small>中央社，2024</small></li>
+        <li><a href="https://www.thenewslens.com/feature/318-movement-10yrs/200024" target="_blank" rel="noopener">318 運動十年專題</a> <small>關鍵評論網</small></li>
+        <li><a href="https://news.pts.org.tw/article/444318" target="_blank" rel="noopener">323 驅離案馬英九出庭</a> <small>公視新聞，2019</small></li>
+        <li><a href="https://news.pts.org.tw/article/388583" target="_blank" rel="noopener">太陽花四週年座談</a> <small>公視新聞，2018</small></li>
+        <li><a href="https://www.thenewslens.com/article/200342" target="_blank" rel="noopener">服貿十年後（德國之聲）</a> <small>關鍵評論網轉載，2024</small></li>
+        <li><a href="https://www.storm.mg/article/26651" target="_blank" rel="noopener">馬：服貿不過 不利加入 TPP、RCEP</a> <small>風傳媒，2014</small></li>
+        <li><a href="https://www.storm.mg/article/29674" target="_blank" rel="noopener">留下 318：中研院史語所蒐集史料</a> <small>風傳媒，2014</small></li>
+        <li><a href="https://www.cna.com.tw/news/aipl/202405280432.aspx" target="_blank" rel="noopener">立院職權修正案三讀 青鳥行動集結</a> <small>中央社，2024</small></li>
+        <li><a href="https://www.mirrormedia.mg/story/20240527inv014" target="_blank" rel="noopener">青鳥行動</a> <small>鏡週刊，2024</small></li>
+      </ol>
+      <aside class="credit">
+        <h3>照片授權</h3>
+        <p>照片取自 <a href="https://commons.wikimedia.org/wiki/Category:Sunflower_Movement" target="_blank" rel="noopener">Wikimedia Commons</a>，經裁切、調色與網點處理。</p>
+        <p style="margin-top:10px">作者與授權請見各照片頁面：</p>
+        <ul class="credit-list">
+          <li><a href="https://commons.wikimedia.org/wiki/File:Occupy_Taiwan_Legislature_by_VOA_(1).jpg" target="_blank" rel="noopener">Occupy Taiwan Legislature by VOA (1)</a></li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:%E5%A4%AA%E9%99%BD%E8%8A%B1%E5%AD%B8%E9%81%8B_2014-04-09_%E9%80%80%E5%AE%88%E5%89%8D%E5%A4%9C_(13739514244).jpg" target="_blank" rel="noopener">太陽花學運 2014-04-09 退守前夜</a></li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Students%27_mass_protest_in_Taiwan_to_end_occupation_of_legislature.jpg" target="_blank" rel="noopener">Students' mass protest in Taiwan to end occupation of legislature</a></li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:%E5%A4%AA%E9%99%BD%E8%8A%B1%E5%AD%B8%E9%81%8B_2014-03-30_(13511817955).jpg" target="_blank" rel="noopener">太陽花學運 2014-03-30</a></li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:%E5%AD%B8%E9%81%8B_IMG_0786_(14795277201).jpg" target="_blank" rel="noopener">學運 IMG_0786</a></li>
+          <li><a href="https://commons.wikimedia.org/wiki/File:Sunflower_student_movement_in_Taiwan_(1).jpg" target="_blank" rel="noopener">Sunflower student movement in Taiwan (1)</a></li>
+        </ul>
+      </aside>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer><div class="wrap"><span>30 秒之後・太陽花學運懶人包</span><span>2014.03.18 – 04.10</span></div></footer>
+
+<a class="progress" href="#top" aria-label="閱讀進度，點擊回到頂端">
+  <svg viewBox="0 0 56 56" aria-hidden="true"><circle class="t" cx="28" cy="28" r="24"/><circle class="b" cx="28" cy="28" r="24"/></svg>
+  <span id="pct">0%</span>
+</a>
+
+<script type="module">
+// 動畫庫載入失敗時，內容與互動照常運作
+let A = null;
+try { A = await import('https://cdn.jsdelivr.net/npm/animejs@4.5.0/dist/bundles/anime.esm.min.js'); } catch (e) { A = null; }
+const { animate, createTimeline, stagger, splitText, onScroll, svg, utils } = A || {};
+const reduce = !A || matchMedia('(prefers-reduced-motion: reduce)').matches;
+const once = (target, enter = 'bottom-=12% top') => onScroll({ target, enter, repeat:false });
+
+/* ============ 背景色隨段落平滑轉換 ============ */
+const body = document.body;
+if (reduce) body.classList.add('no-anim');
+const secs = [...document.querySelectorAll('section[data-bg]')];
+const navLinks = [...document.querySelectorAll('.mast nav a')];
+let current = null;
+function paint(sec){
+  if (sec === current) return; current = sec;
+  const bg = sec.dataset.bg, fg = sec.dataset.fg;
+  if (reduce) { body.style.backgroundColor = bg; body.style.color = fg; }
+  else animate(body, { backgroundColor:bg, color:fg, duration:1100, ease:'inOutSine', composition:'replace' });
+  document.documentElement.style.setProperty('--top-band', bg);
+  navLinks.forEach(a => a.classList.toggle('on', a.getAttribute('href') === '#' + sec.id));
+}
+const io = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) paint(e.target); });
+}, { rootMargin:'-48% 0px -48% 0px' });
+secs.forEach(s => io.observe(s));
+paint(secs[0]);
+
+/* ============ 時間軸 ============ */
+const events = [
+  { date:'3/17', name:'30 秒審查', stamp:'2014.03.17', title:'30 秒，送出委員會',
+    body:'內政委員會召委張慶忠在推擠混亂中宣布，服貿「視為已審查」，直接送院會存查。過程大約 30 秒，被批評不透明，成為整場運動的導火線。',
+    media:'<div class="bignum">30<small> 秒</small></div>' },
+  { date:'3/18', name:'進入議場', stamp:'2014.03.18', title:'翻過圍牆，占領議場',
+    body:'晚上約 9 點，學生和民眾翻過立法院圍牆，9 點半左右占領議場。他們的訴求包括：退回服貿、制定兩岸協議監督條例、先立法再審查、召開公民憲政會議。',
+    media:'<figure class="cut tape"><img src="img/timeline-occupy.webp" alt="占領期間，立法院議場內坐滿了人" width="800" height="800"><figcaption>占領期間的議場</figcaption></figure>' },
+  { date:'3/23–24', name:'行政院驅離', stamp:'2014.03.24', title:'行政院，清晨的驅離',
+    body:'3 月 23 日晚上，群眾進入行政院。24 日清晨，警方強制驅離，動用了水車，多人受傷。',
+    media:'<div class="figs"><div class="fig"><b data-n="42">42</b><span>警方最初公布的受傷人數</span></div><div class="fig red"><b data-n="166">166</b><span>2023 年監察院調查：實際急診就醫人數</span></div></div>' },
+  { date:'3/30', name:'凱道遊行', stamp:'2014.03.30', title:'凱道上，到底有多少人？',
+    body:'反服貿遊行湧進凱達格蘭大道。關於人數，三個來源給了三個答案。',
+    media:'<div class="figs"><div class="fig"><b data-n="11.6" data-d="1">11.6</b><span>萬人，警方估計最高峰</span></div><div class="fig"><b data-n="44">44</b><span>萬人，空照圖與地理資訊分析</span></div><div class="fig red"><b data-n="50">50</b><span>萬人，主辦方宣稱</span></div><p class="callout">算法和立場不同，數字就會不同。看新聞時，先問一句：這個數字是誰算的？</p></div>' },
+  { date:'4/6', name:'院長承諾', stamp:'2014.04.06', title:'立法院長的承諾',
+    body:'立法院長王金平承諾：在《兩岸協議監督條例》完成立法前，不召集服貿相關協商。',
+    media:'<div class="bignum" style="font-size:clamp(60px,8vw,100px);line-height:1.15"><small style="font-size:1em">先立法</small><br><small style="font-size:.6em;color:#002FA7">再審查</small></div>' },
+  { date:'4/10', name:'出關播種', stamp:'2014.04.10', title:'出關播種',
+    body:'學生宣布「出關播種」，傍晚約 6 點 17 分退出議場。這場占領一共持續了 24 天。',
+    media:'<figure class="cut tape"><img src="img/timeline-0410.webp" alt="議場內孫中山遺像下貼著「佔領 582 小時」標語" width="800" height="800"><figcaption>議場內的「佔領 582 小時」標語</figcaption></figure>' },
+];
+const chips = document.querySelector('.chips');
+const bar = document.querySelector('.track i');
+const pText = document.querySelector('.p-text');
+const pMedia = document.querySelector('.p-media');
+events.forEach((e, i) => {
+  const b = document.createElement('button');
+  b.className = 'chip'; b.type = 'button'; b.setAttribute('role','tab'); b.setAttribute('aria-controls','panel');
+  b.innerHTML = `<span class="d">${e.date}</span><span class="n">${e.name}</span>`;
+  b.addEventListener('click', () => show(i, true));
+  chips.appendChild(b);
+});
+function countIn(root){
+  root.querySelectorAll('[data-n]').forEach(el => {
+    const n = parseFloat(el.dataset.n), d = +(el.dataset.d || 0), o = { v:0 };
+    if (reduce) { el.textContent = n.toFixed(d); return; }
+    animate(o, { v:n, duration:900, ease:'outExpo', onUpdate:() => { el.textContent = o.v.toFixed(d); } });
+  });
+}
+function show(i, anim){
+  const e = events[i];
+  chips.querySelectorAll('.chip').forEach((c, k) => c.setAttribute('aria-selected', k === i ? 'true' : 'false'));
+  pText.innerHTML = `<span class="stamp">${e.stamp}</span><h3>${e.title}</h3><p>${e.body}</p>`;
+  pMedia.innerHTML = e.media;
+  const ratio = (i + 1) / events.length;
+  if (!anim || reduce) { bar.style.transform = `scaleX(${ratio})`; return; }
+  animate(bar, { scaleX:ratio, duration:700, ease:'inOutQuart' });
+  // 標題：遮罩由左至右揭示
+  animate(pText.querySelector('h3'), { clipPath:['inset(0 100% 0 0)','inset(0 0% 0 0)'], duration:700, ease:'inOutQuart' });
+  animate(pText.querySelector('p'), { opacity:[0,1], y:[16,0], filter:['blur(6px)','blur(0px)'], duration:600, delay:150, ease:'outQuart' });
+  animate(pText.querySelector('.stamp'), { letterSpacing:['.5em','.06em'], opacity:[0,1], duration:600, ease:'outQuart' });
+  const media = pMedia.firstElementChild;
+  if (media) animate(media, { opacity:[0,1], scale:[.9,1], duration:600, ease:'outBack(1.6)' });
+  countIn(pMedia);
+}
+show(0, false);
+
+/* ============ 翻面卡 ============ */
+document.querySelectorAll('.flip').forEach(btn => {
+  const inner = btn.querySelector('.flip-inner'); let f = false;
+  btn.addEventListener('click', () => {
+    f = !f; btn.setAttribute('aria-pressed', String(f));
+    if (reduce) inner.style.transform = `rotateY(${f ? 180 : 0}deg)`;
+    else animate(inner, { rotateY: f ? 180 : 0, duration:800, ease:'outBack(1.1)' });
+  });
+});
+
+/* ============ 閱讀進度 ============ */
+const ring = document.querySelector('.progress .b'), pct = document.getElementById('pct'), C = 2 * Math.PI * 24;
+ring.style.strokeDasharray = C;
+function progress(){
+  const max = document.documentElement.scrollHeight - innerHeight;
+  const p = max > 0 ? Math.min(1, Math.max(0, scrollY / max)) : 0;
+  ring.style.strokeDashoffset = C * (1 - p); pct.textContent = Math.round(p * 100) + '%';
+}
+addEventListener('scroll', progress, { passive:true }); addEventListener('resize', progress); progress();
+
+/* ============ 文字動畫 ============ */
+if (!reduce) {
+  const split = el => splitText(el, { chars:true }).chars;
+
+  /* --- HERO 開場：文字從無到有 → 數字 00 卡頓跳到 30、畫面抖動 → 其餘文字依序出現 --- */
+  const hero = document.querySelector('.hero .wrap');
+  const num = document.querySelector('.num'), c = { v:0 };
+  num.textContent = '00';
+  const unitChars = split(document.querySelector('.unit'));
+  const ledeChars = split(document.querySelector('.hero .lede'));
+  // 先把每個元素設成「無」，再移除預先隱藏，確保不會閃現
+  utils.set(['#kicker', num, '.cue', '.hero-cuts .cut'], { opacity:0 });
+  utils.set([...unitChars, ...ledeChars], { opacity:0 });
+  utils.set('.hero .q', { clipPath:'inset(0 100% 0 0)' });
+  document.documentElement.classList.remove('pre');
+
+  // 抖動關鍵影格：隨機位移，越來越大
+  const shake = (n, amp) => Array.from({ length:n }, (_, i) => ({ to: i === n - 1 ? 0 : utils.random(-amp, amp) * (0.5 + i / n) }));
+  const COUNT = 1600; // 00 → 30 的時間
+
+  createTimeline({ defaults:{ ease:'outQuart' } })
+    // 字距變化：日期從無到有、由寬鬆收合
+    .add('#kicker', { letterSpacing:['1.1em','.14em'], opacity:[0,1], duration:900 }, 200)
+    // 數字從無到有
+    .add(num, { opacity:[0,1], duration:120, ease:'linear' }, 700)
+    // 00 → 30 卡頓跳動：每一格停一下（steps）
+    .add(c, { v:30, duration:COUNT, ease:'steps(10)', onUpdate:() => { num.textContent = String(Math.round(c.v)).padStart(2,'0'); } }, 700)
+    // 跳動時畫面跟著抖動，節奏也是一格一格的
+    .add(hero, { x:shake(10, 7), y:shake(10, 5), duration:COUNT, ease:'steps(10)' }, 700)
+    .add('.hero-bg', { opacity:[{ to:.18 },{ to:.42 },{ to:.24 },{ to:.38 },{ to:.32 }], duration:COUNT, ease:'steps(10)' }, 700)
+    // 跳到 30 的瞬間：數字重擊＋一次大抖動
+    .add(num, { scale:[1.22,1], duration:520, ease:'outBack(2.4)' }, 700 + COUNT)
+    .add(hero, { x:shake(6, 16), y:shake(6, 10), duration:360, ease:'steps(6)' }, 700 + COUNT)
+    // 位置變化＋旋轉：「秒。」從分散位置聚合
+    .add(unitChars, { x:{ from:() => utils.random(-240,240) }, y:{ from:() => utils.random(-200,160) }, rotate:{ from:() => utils.random(-35,35) },
+        opacity:[0,1], duration:900, delay:stagger(90), ease:'outExpo' }, 700 + COUNT + 120)
+    // 進場：逐字從無到有、由下往上、模糊變清晰
+    .add(ledeChars, { opacity:[0,1], y:['0.6em','0em'], filter:['blur(10px)','blur(0px)'], duration:650, delay:stagger(14) }, '-=500')
+    // 遮罩揭示：問句由左至右揭開
+    .add('.hero .q', { clipPath:['inset(0 100% 0 0)','inset(0 0% 0 0)'], duration:850, ease:'inOutQuart' }, '-=350')
+    .add('.cue', { opacity:[0,1], y:[20,0], duration:600 }, '-=350')
+    .add('.hero-cuts .cut', { opacity:[0,1], scale:[1.2,1], rotate:{ from:el => +el.dataset.r * 3, to:el => +el.dataset.r }, duration:800, delay:stagger(160), ease:'outBack(1.4)' }, 700 + COUNT + 200);
+  animate('.cue .arrow', { y:[0,6], duration:700, loop:true, alternate:true, ease:'inOutSine' });
+
+  /* --- 01 進場 Entrance：段落大標逐字淡入、上移、去模糊 --- */
+  document.querySelectorAll('[data-split="enter"]').forEach(el => {
+    animate(split(el), { opacity:[0,1], y:['0.5em','0em'], filter:['blur(14px)','blur(0px)'], duration:900, delay:stagger(35), ease:'outQuart', autoplay:once(el) });
+  });
+
+  /* --- 字距變化：段落標籤 --- */
+  document.querySelectorAll('[data-track]').forEach(el => {
+    animate(el, { letterSpacing:['.7em','.14em'], opacity:[0,1], duration:1000, ease:'outQuart', autoplay:once(el) });
+  });
+
+  /* --- 02 遮罩揭示 Reveal：由左至右 --- */
+  document.querySelectorAll('.sec [data-reveal]').forEach(el => {
+    animate(el, { clipPath:['inset(0 100% 0 0)','inset(0 0% 0 0)'], duration:1100, ease:'inOutQuart', autoplay:once(el, 'bottom-=8% top') });
+  });
+
+  /* --- 04 縮放 Scale：逐字由小彈入 --- */
+  document.querySelectorAll('.sec [data-split="pop"]').forEach(el => {
+    animate(split(el), { scale:[0,1], opacity:[0,1], duration:700, delay:stagger(45), ease:'outBack(2.2)', autoplay:once(el) });
+  });
+
+  /* --- 04 縮放 Scale：「24 DAYS」隨捲動由大變小 --- */
+  animate('.giant', { scale:[2.2,1], letterSpacing:['.2em','-.02em'], ease:'linear',
+    autoplay:onScroll({ target:'#timeline', enter:'bottom top', leave:'center center', sync:true }) });
+
+  /* --- 03 位置變化 Movement：結語從分散位置聚合成句（旋轉只用在聚合，呼應拼貼標語） --- */
+  document.querySelectorAll('.closing [data-split="move"]').forEach((el, i) => {
+    animate(split(el), { x:{ from:() => utils.random(-320,320) }, y:{ from:() => utils.random(-180,180) }, rotate:{ from:() => utils.random(-40,40) },
+      opacity:[0,1], duration:1400, delay:stagger(40, { start:i * 300 }), ease:'outExpo', autoplay:once('.slogan', 'bottom-=18% top') });
+  });
+
+  /* --- 數字由小彈入＋跳動 --- */
+  document.querySelectorAll('.stat .v[data-count]').forEach(el => {
+    const n = parseFloat(el.dataset.count), d = +(el.dataset.dec || 0), suf = el.dataset.suffix || '', o = { v:0 };
+    animate(o, { v:n, duration:1400, ease:'outExpo', onUpdate:() => { el.textContent = o.v.toFixed(d) + suf; }, autoplay:once(el) });
+    animate(el, { scale:[.4,1], opacity:[0,1], duration:900, ease:'outBack(1.8)', autoplay:once(el) });
+  });
+
+  /* --- 剪報貼上 --- */
+  document.querySelectorAll('.board .cut, .impact-photo .over, .relate-cuts .cut').forEach(el => {
+    const r = +(el.dataset.r || 0);
+    utils.set(el, { rotate:r });
+    animate(el, { opacity:[0,1], scale:[1.18,1], rotate:[r * 3, r], y:[40,0], duration:900, ease:'outBack(1.3)', autoplay:once(el) });
+  });
+  document.querySelectorAll('.qa article p, .life li, .acts li, .stat p, .bird').forEach(el => {
+    animate(el, { opacity:[0,1], y:[24,0], filter:['blur(6px)','blur(0px)'], duration:800, ease:'outQuart', autoplay:once(el) });
+  });
+  animate(svg.createDrawable('.circled path'), { draw:['0 0','0 1'], duration:1000, ease:'inOutQuad', autoplay:once('.circled', 'bottom-=15% top') });
+  animate('#swap', { scale:[1,1.3,1], duration:800, ease:'inOutSine', autoplay:once('.bird', 'bottom-=20% top') });
+  animate('.glow', { scale:[.85,1.1], opacity:[.6,1], duration:2800, loop:true, alternate:true, ease:'inOutSine' });
+  animate('.flip', { opacity:[0,1], y:[40,0], duration:900, delay:stagger(120), ease:'outQuart', autoplay:once('.flips') });
+}
+</script>
+
+</body>
+</html>
